@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class FrontendController extends Controller
 {
     public function index()
-    {
+    {// dd('');
         $featured_products = Product::where('status','0')->where('trending','1')->take('15')->get();
         $trending_category = Category::where('popular','1')->take('15')->get();
         return view('frontend.index',compact('featured_products','trending_category'));
