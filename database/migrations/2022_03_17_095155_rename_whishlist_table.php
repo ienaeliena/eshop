@@ -23,6 +23,6 @@ class RenameWhishlistTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::rename('wishlists', 'whishlists');
     }
 }
