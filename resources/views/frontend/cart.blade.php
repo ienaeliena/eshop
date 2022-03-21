@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-<div class="py-3 mb-4 shadow-sm bg-warning border-top">
+<div class="pt-5 shadow-sm bg-warning border-top">
     <div class="container">
-        <h6 class="mb-0">
+        <h6 class="mb-0 py-3">
             <a href="{{ url('/') }}">
                 Home
             </a>

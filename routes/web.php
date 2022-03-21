@@ -51,13 +51,10 @@ Route::middleware(['auth'])->group(function (){
     Route::post('add-review',[ReviewController::class,'create']);
     Route::get('edit-review/{product_slug}/userreview',[ReviewController::class,'edit']);
     Route::put('update-review',[ReviewController::class,'update']);
-
     Route::get('wishlist',[WishlistController::class,'index']);
-
-
-
-    // skip tuto wishlist
     Route::post('proceed-to-pay',[CheckoutController::class,'razorpaycheck']);
+    Route::get('my-profile',[UserController::class,'viewProfile']);
+    Route::get('edit-profile',[UserController::class,'updateProfile']);
 
 });
 
@@ -87,4 +84,5 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::get('users',[DashboardController::class,'users']);
     Route::get('view-user/{id}',[DashboardController::class,'viewUser']);
+
  });

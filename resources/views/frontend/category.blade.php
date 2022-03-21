@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<div class="py-5">
-    <div class="container">
+<div class="py-5 ">
+    <div class="container mb-0 py-5">
         <div class="row">
             <div class="col-md-12">
                 <h2>All Categories</h2>

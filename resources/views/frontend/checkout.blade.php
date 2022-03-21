@@ -176,7 +176,7 @@
               var pincode = $('.pincode').val();
 
               var token   = $('meta[name="csrf-token"]').attr('content');
-
+              
               $.ajax({
                   method:"POST",
                   url:'/place-order',

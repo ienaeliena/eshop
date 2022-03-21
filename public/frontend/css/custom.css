@@ -63,7 +63,10 @@
 
 /* End of Star Rating */
 .whatsapp-chat{
-    bottom: 10px;
+    bottom: 20px;
     left: 10px;
     position: fixed;
+}
+.profile-details{
+    font-size: 12px;
 }

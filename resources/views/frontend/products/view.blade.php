@@ -3,6 +3,8 @@
 @section('title',$products->name)
 
 @section('content')
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -54,9 +56,10 @@
     </div>
   </div>
 
-<div class="py-3 mb-4 shadow-sm bg-warning border-top">
+
+<div class="pt-5 shadow-sm bg-warning border-top">
     <div class="container">
-        <h6 class="mb-0">
+        <h6 class="mb-0 py-3">
             <a href="{{ url('/') }}">
                 Collections
             </a>

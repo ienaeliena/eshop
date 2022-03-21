@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark position fixed-top">
     <div class="container">
       <a class="navbar-brand" href="{{ url('/') }}">E-Shop</a>
       <div class="search-bar">
@@ -54,7 +54,7 @@
                 {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url('my-profile')}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{ url('my-orders') }}">My Order</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>

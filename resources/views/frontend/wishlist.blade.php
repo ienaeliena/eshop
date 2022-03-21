@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-<div class="py-3 mb-4 shadow-sm bg-warning border-top">
+<div class="pt-5 shadow-sm bg-warning border-top">
     <div class="container">
-        <h6 class="mb-0">
+        <h6 class="mb-0 py-3">
             <a href="{{ url('/') }}">
                 Home
             </a>
@@ -35,7 +35,7 @@
                                 <h6>RM {{ $item->products->selling_price }}</h6>
                             </div>
                             <div class="col-md-2 my-auto">
-                                <input type="hidden" class="prod_id" value="{{ $item->prod_id }}"> 
+                                <input type="hidden" class="prod_id" value="{{ $item->prod_id }}">
                                 @if ($item->products->qty >= $item->prod_qty)
                                 <label for="Quantity">Quantity</label>
                                     <div class="input-group text-center mb-3" style="width:130px;">
