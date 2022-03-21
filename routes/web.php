@@ -54,7 +54,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('wishlist',[WishlistController::class,'index']);
     Route::post('proceed-to-pay',[CheckoutController::class,'razorpaycheck']);
     Route::get('my-profile',[UserController::class,'viewProfile']);
-    Route::get('edit-profile',[UserController::class,'updateProfile']);
+    Route::get('edit-profile',[UserController::class,'editProfile']);
+    route::post('update-profile',[UserController::class,'updateProfile']);
 
 });
 
