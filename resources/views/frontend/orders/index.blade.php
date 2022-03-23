@@ -30,7 +30,10 @@
                                     <td>{{ $item->tracking_no }}</td>
                                     <td>{{ $item->total_price }}</td>
                                     <td>{{ $item->status == '0' ? 'pending':'completed' }}</td>
-                                    <td><a href="{{ url('view-order/'.$item->id) }}" class="btn btn-primary">View</a></td>
+                                    <td><a href="{{ url('view-order/'.$item->id) }}" class="btn btn-primary">View Order</a>
+                                        &nbsp;
+                                        <a href="{{ url('view-invoice/'.$item->id) }}" class="btn btn-secondary">View Invoice</a></td>
+
                                 </tr>
                             @endforeach
                         </tbody>
