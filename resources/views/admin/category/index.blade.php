@@ -29,8 +29,8 @@
                        <img src="{{ asset('storage/'.$item->image) }}" alt="image here" class="cate-image">
                     </td>
                     <td>
-                        <a href="{{ url('edit_category/'.$item->id) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ url('delete_category/'.$item->id) }}" class="btn btn-danger">Delete</a>
+                        <a href="{{ url('edit-category/'.$item->id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url('delete-category/'.$item->id) }}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 @endforeach
