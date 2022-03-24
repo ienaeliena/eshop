@@ -38,21 +38,30 @@ class UserController extends Controller
     {
         if(Auth::check())
         {
-            $user = User::where('id',Auth::id())->first();
-            $user->fname = $request->fname;
-            $user->lname = $request->lname;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->address1 = $request->address1;
-            $user->address2 = $request->address2;
-            $user->city = $request->city;
-            $user->state = $request->state;
-            $user->country = $request->country;
-            $user->pincode = $request->pincode;
-            $user->updated_at = Carbon::now();
-            $user->update();
+            $emailCheck = User::where('email',$request->email)->where('id','!=',Auth::id())->first();
+            if(!$emailCheck)
+            {
+                $user = User::where('id',Auth::id())->first();
+                $user->fname = $request->fname;
+                $user->lname = $request->lname;
+                $user->email = $request->email;
+                $user->phone = $request->phone;
+                $user->address1 = $request->address1;
+                $user->address2 = $request->address2;
+                $user->city = $request->city;
+                $user->state = $request->state;
+                $user->country = $request->country;
+                $user->pincode = $request->pincode;
+                $user->updated_at = Carbon::now();
+                $user->update();
 
-            return redirect('my-profile')->with('status','Successfully Updated user Profile');
+                return redirect('my-profile')->with('status','Successfully Updated user Profile');
+
+            }else
+            {
+                return redirect('my-profile')->with('status','Email already Exist');
+            }
+
 
 
         }
