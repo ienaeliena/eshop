@@ -162,7 +162,7 @@
           // Successful capture! For dev/demo purposes:
               console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
               var transaction = orderData.purchase_units[0].payments.captures[0];
-              alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+            //   alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
 
               var firstname = $('.firstname').val();
               var lastname = $('.lastname').val();
@@ -176,7 +176,7 @@
               var pincode = $('.pincode').val();
 
               var token   = $('meta[name="csrf-token"]').attr('content');
-              
+
               $.ajax({
                   method:"POST",
                   url:'/place-order',
@@ -199,7 +199,7 @@
                       console.log('iena ',response);
                       swal(response.status)
                       .then((value) => {
-                        // window.location.href = "/my-orders";
+                         window.location.href = "/my-orders";
                         });
                   }
               });

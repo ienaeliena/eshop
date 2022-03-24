@@ -124,7 +124,7 @@ class CheckoutController extends Controller
 
         }
 
-        return redirect('/')->with('status',"Order Placed Successfully");
+        return redirect('my-orders')->with('status',"Order Placed Successfully");
     }
 
     // public function razorpaycheck(Request $request)

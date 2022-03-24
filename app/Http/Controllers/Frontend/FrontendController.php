@@ -22,7 +22,7 @@ class FrontendController extends Controller
 
     public function category()
     {
-        $category = Category::where('status','0')->get();
+        $category = Category::where('status','1')->get();
         return view('frontend.category',compact('category'));
     }
 
@@ -30,7 +30,7 @@ class FrontendController extends Controller
     {
         if(Category::where('slug',$slug)->exists()){
             $category = Category::where('slug',$slug)->first();
-            $products = Product::where('cate_id',$category->id)->where('status','0')->get();
+            $products = Product::where('cate_id',$category->id)->where('status','1')->get();
             return view('frontend.products.index',compact('category','products'));
 
         }else{
@@ -80,7 +80,7 @@ class FrontendController extends Controller
 
     public function productListAjax()
     {
-        $products = Product::select('name')->where('status','0')->get();
+        $products = Product::select('name')->where('status','1')->get();
         $data = [];
 
         foreach($products as $item)
@@ -97,7 +97,7 @@ class FrontendController extends Controller
     {
         $searchedProduct = $request->product_name;
         if($searchedProduct != ""){
-            $product = Product::where('name','LIKE',"%$searchedProduct%")->where('status','0')->first();
+            $product = Product::where('name','LIKE',"%$searchedProduct%")->where('status','1')->first();
             if($product){
                 return redirect('category/'.$product->category->slug.'/'.$product->slug);
 
