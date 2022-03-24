@@ -61,7 +61,10 @@ Orders
                                     <td>{{ $item->total_price }}</td>
                                     <td>{{ $orderStatus }}</td>
                                     <td>{{ $paymentStatus }}</td>
-                                    <td><a href="{{ url('admin/view-order/'.$item->id) }}" class="btn btn-primary">View</a></td>
+                                    <td>
+                                        <a href="{{ url('admin/view-order/'.$item->id) }}" class="btn btn-primary">View Order</a>
+                                        <a href="{{ url('admin-view-invoice/'.$item->id) }}" class="btn btn-primary" target="_blank">View Invoice</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

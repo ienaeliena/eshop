@@ -10,7 +10,7 @@ class InvoiceController extends Controller
 {
     public function view($id){
         $invoice = Invoice::where('order_id',$id)->first();
-        return view('frontend.invoices.view-invoice',compact('invoice'));
+        return view('frontend.invoices.view',compact('invoice'));
 
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AdminInvoiceController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -87,6 +88,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('admin/view-order/{id}',[OrderController::class,'view']);
     Route::put('update-order/{id}',[OrderController::class,'updateOrder']);
     Route::get('order-history',[OrderController::class,'orderHistory']);
+
+
+    Route::get('admin-view-invoice/{id}',[AdminInvoiceController::class,'view']);
 
     Route::get('users',[DashboardController::class,'users']);
     Route::get('view-user/{id}',[DashboardController::class,'viewUser']);
