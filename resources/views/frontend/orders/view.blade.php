@@ -51,6 +51,7 @@
                                         <th>Name</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th>Total Price</th>
                                         <th>Image</th>
                                     </tr>
                                 </thead>
@@ -60,6 +61,7 @@
                                             <td>{{ $item->products->name }}</td>
                                             <td>{{ $item->qty }}</td>
                                             <td>{{ $item->price }}</td>
+                                            <td>{{ $item->price * $item->qty  }}</td>
                                             <td>
                                                 <img src="{{ asset('storage/'.$item->products->image) }}" width="50px" alt="{{ $item->products->name }}">
 

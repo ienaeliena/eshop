@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\InvoiceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Frontend\RatingController;
 use App\Http\Controllers\Frontend\ReviewController;
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function (){
     route::post('place-order',[checkoutController::class,'placeOrder']);
 
     Route::get('my-orders',[UserController::class,'index']);
+    Route::get('view-invoice/{id}',[InvoiceController::class,'view']);
     Route::get('view-order/{id}',[UserController::class,'view']);
     Route::post('add-rating',[RatingController::class,'add']);
     Route::get('add-review/{product_slug}/userreview',[ReviewController::class,'add']);

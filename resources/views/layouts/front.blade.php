@@ -60,7 +60,13 @@
     </div>
 
     <div class="whatsapp-chat">
-        <a href="https://wa.me/+60133431203?text=I'm%20interested%20in%20your%20car%20for%20sale" target="_blank">
+        @php
+            $url = url('/');
+            $url = str_replace('http://', '', $url);
+            $whatssAppMsg = "Enquiry  : ".$url;
+            $whatsAppUrl = "https://wa.me/+60133431203?text=".$whatssAppMsg;
+        @endphp
+        <a href="{{ $whatsAppUrl }}" target="_blank">
             <img src="{{ asset('assets/images/whatsapp-icon.png') }}" alt="whatsapp icon" width="80px" height="80px">
         </a>
     </div>

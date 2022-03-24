@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
@@ -31,6 +33,13 @@ class CheckoutController extends Controller
     }
     public function placeOrder(Request $request)
     {
+        if(Order::latest()->first() !== null){
+            $invId = Order::latest()->first()->id +1 ; // get lattest order id
+        }else{
+            $invId = 1;
+        }
+        $invoiceNumber = "INV".Carbon::now()->format('ymd').$invId;
+
         $order = new Order();
         $order->user_id = Auth::id();
         $order->fname = $request->fname;
@@ -51,12 +60,29 @@ class CheckoutController extends Controller
         $cartItems_total = Cart::where('user_id',Auth::id())->get();
         foreach($cartItems_total as $prod)
         {
-            $total += $prod->products->selling_price;
+            // $total += $prod->products->selling_price;
+            $total += $prod->products->selling_price * $prod->prod_qty;
         }
         $order->total_price = $total;
 
         $order->tracking_no = 'iena'.rand(1111,9999);
+        if($request->payment_mode == "Paid By Paypal")
+        {
+            $order->payment_status = 1;
+
+        }else{
+            $order->payment_mode = "COD";
+            $order->payment_id = $invoiceNumber;
+        }
         $order->save();
+
+        //save invoice information
+
+        $invoice = new Invoice();
+        $invoice->invoice_no = $invoiceNumber;
+        $invoice->order_id= $invId;
+        $invoice->user_id= Auth::id();
+        $invoice->save();
 
         $cartItems = Cart::where('user_id',Auth::id())->get();
         foreach($cartItems as $item)
@@ -101,41 +127,41 @@ class CheckoutController extends Controller
         return redirect('/')->with('status',"Order Placed Successfully");
     }
 
-    public function razorpaycheck(Request $request)
-    {
-        $cartItems = Cart::where('user_id', Auth::id())->get();
-        $total_price = 0;
-        foreach($cartItems as $item)
-        {
-            $total_price += $item->products->selling_price * $item->prod_qty;
-        }
+    // public function razorpaycheck(Request $request)
+    // {
+    //     $cartItems = Cart::where('user_id', Auth::id())->get();
+    //     $total_price = 0;
+    //     foreach($cartItems as $item)
+    //     {
+    //         $total_price += $item->products->selling_price * $item->prod_qty;
+    //     }
 
-        $firstname = $request->firstname;
-        $lastname = $request->lastname;
-        $email = $request->email;
-        $phone = $request->phone;
-        $address1 = $request->address1;
-        $address2 = $request->address2;
-        $city = $request->city;
-        $state = $request->state;
-        $country = $request->country;
-        $pincode = $request->pincode;
-
-
-        return response()->json([
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'email' => $email,
-            'phone' => $phone,
-            'address1' => $address1,
-            'address2' => $address2,
-            'city' => $city,
-            'state' => $state,
-            'country' => $country,
-            'pincode' => $pincode,
-            'total_price' => $total_price
-        ]);
+    //     $firstname = $request->firstname;
+    //     $lastname = $request->lastname;
+    //     $email = $request->email;
+    //     $phone = $request->phone;
+    //     $address1 = $request->address1;
+    //     $address2 = $request->address2;
+    //     $city = $request->city;
+    //     $state = $request->state;
+    //     $country = $request->country;
+    //     $pincode = $request->pincode;
 
 
-    }
+    //     return response()->json([
+    //         'firstname' => $firstname,
+    //         'lastname' => $lastname,
+    //         'email' => $email,
+    //         'phone' => $phone,
+    //         'address1' => $address1,
+    //         'address2' => $address2,
+    //         'city' => $city,
+    //         'state' => $state,
+    //         'country' => $country,
+    //         'pincode' => $pincode,
+    //         'total_price' => $total_price
+    //     ]);
+
+
+    // }
 }
