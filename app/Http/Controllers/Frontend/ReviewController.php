@@ -19,18 +19,18 @@ class ReviewController extends Controller
 
         if($product)
         {
-            $product_id = $product->id;
-            $review = Review::where('user_id',Auth::id())->where('prod_id',$product_id)->first();
+            $productId = $product->id;
+            $review = Review::where('user_id',Auth::id())->where('prod_id',$productId)->first();
 
             if($review){
                 return view('frontend.reviews.edit',compact('review'));
             }
             else{
-                $verified_purchase = Order::where('orders.user_id',Auth::id())
+                $verifiedPurchase = Order::where('orders.user_id',Auth::id())
                    ->join('order_items','orders.id','order_items.order_id')
-                   ->where('order_items.prod_id',$product_id)->get();
+                   ->where('order_items.prod_id',$productId)->get();
 
-                return view('frontend.reviews.index',compact('product','verified_purchase'));
+                return view('frontend.reviews.index',compact('product','verifiedPurchase'));
             }
 
 
@@ -46,35 +46,35 @@ class ReviewController extends Controller
 
     public function create(Request $request)
     {
-        $product_id = $request->product_id;
-        $product = Product::where('id',$product_id)->where('status','0')->first();
-        $category_slug = $product->category->slug;
-        $prod_slug = $product->slug;
+        $productId = $request->product_id;
+        $product = Product::where('id',$productId)->where('status','0')->first();
+        $categorySlug = $product->category->slug;
+        $prodSlug = $product->slug;
 
 
         if($product)
         {
-            $user_review = $request->user_review;
-            $existing_review = Review::where('prod_id',$product_id)->where('user_id',Auth::id())->first();
+            $userReview = $request->user_review;
+            $existingReview = Review::where('prod_id',$productId)->where('user_id',Auth::id())->first();
 
-            if($existing_review)
+            if($existingReview)
             {
-                $existing_review->user_review = $user_review;
-                $existing_review->updated_at = Carbon::now();
-                $existing_review->update();
-                return redirect('category/'.$category_slug.'/'.$prod_slug)->with('status',"Thank you, your review has been updated ");
+                $existingReview->user_review = $userReview;
+                $existingReview->updated_at = Carbon::now();
+                $existingReview->update();
+                return redirect('category/'.$categorySlug.'/'.$prodSlug)->with('status',"Thank you, your review has been updated ");
             }
             else
             {
-                $new_review = Review::create([
+                $newReview = Review::create([
                     'user_id' => Auth::id(),
-                    'prod_id' => $product_id,
-                    'user_review' => $user_review
+                    'prod_id' => $productId,
+                    'user_review' => $userReview
                 ]);
 
-                if($new_review)
+                if($newReview)
                 {
-                    return redirect('category/'.$category_slug.'/'.$prod_slug)->with('status',"Thank you for writing a review ");
+                    return redirect('category/'.$categorySlug.'/'.$prodSlug)->with('status',"Thank you for writing a review ");
 
                 }
 
@@ -116,18 +116,18 @@ class ReviewController extends Controller
 
     public function update(Request $request)
     {
-        $user_review = $request->user_review;
-        if($user_review != '')
+        $userReview = $request->user_review;
+        if($userReview != '')
         {
             $review = review::where('id',$request->review_id)->first();
             if($review){
-                $review->user_review = $user_review;
+                $review->user_review = $userReview;
                 $review->updated_at =  Carbon::now();
                 $review->update();
-                $prod_slug = $review->product->slug;
+                $prodSlug = $review->product->slug;
                 $category = Category::find($review->product->cate_id);
-                $category_slug = $category->slug;
-                return redirect('category/'.$category_slug.'/'.$prod_slug)->with('status',"Thank you, your review has been updated ");
+                $categorySlug = $category->slug;
+                return redirect('category/'.$categorySlug.'/'.$prodSlug)->with('status',"Thank you, your review has been updated ");
 
             }
             else

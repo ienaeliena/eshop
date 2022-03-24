@@ -47,12 +47,6 @@ class ProductController extends Controller
             $imagePath = $request->file('image')->storeAs('products',$filename,'public');
             $products->image = $imagePath;
 
-            // $file = $request->file('image');
-            // $ext = $file->getClientOriginalExtension();
-            // $filename = time().'.'.$ext ;
-            // $file->move('assets/uploads/products/'.$filename);
-            // $products->image = $filename;
-
         }
         $products->cate_id = $request->cate_id;
         $products->name = $request->name;

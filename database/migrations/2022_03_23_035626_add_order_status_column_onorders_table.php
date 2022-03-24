@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameStatusColumnOnOrdersTable extends Migration
+class AddOrderStatusColumnOnordersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,10 @@ class RenameStatusColumnOnOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->renameColumn('status', 'payment_status');
+            $table->after('payment_status', function ($table) {
+                $table->tinyInteger('order_status')->default('0')->comment('pending=0,processing=1,shipped=2, delivered=3');
+
+            });
         });
     }
 
@@ -26,7 +29,7 @@ class RenameStatusColumnOnOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->renameColumn('payment_status', 'status');
+            $table->dropColumn('order_status');
         });
     }
 }

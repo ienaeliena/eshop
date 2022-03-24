@@ -13,29 +13,29 @@ class CartController extends Controller
 {
     public function addProduct(Request $request)
     {
-        $product_id = $request->input('product_id');
-        $product_qty = $request->input('product_qty');
+        $productId = $request->input('product_id');
+        $productQty = $request->input('product_qty');
 
         if(Auth::check())
         {
-            $prod_check = Product::where('id', $product_id)->first();
+            $prod_check = Product::where('id', $productId)->first();
             if($prod_check)
             {
-                if(Cart::where('prod_id', $product_id)->where('user_id', Auth::id())->exists())
+                if(Cart::where('prod_id', $productId)->where('user_id', Auth::id())->exists())
                 {
                     return response()->json(['status' => $prod_check->name." Already in Cart"]);
                 }
                 else
                 {
                     $cartItem = new Cart();
-                    $cartItem->prod_id = $product_id;
-                    $cartItem->prod_qty = $product_qty;
+                    $cartItem->prod_id = $productId;
+                    $cartItem->prod_qty = $productQty;
                     $cartItem->user_id = Auth::id();
                     $cartItem->save();
 
-                    if(Wishlist::where('user_id',Auth::id())->where('prod_id',$product_id)->exists())
+                    if(Wishlist::where('user_id',Auth::id())->where('prod_id',$productId)->exists())
                     {
-                        $wishlistCheck = Wishlist::where('user_id',Auth::id())->where('prod_id',$product_id)->first();
+                        $wishlistCheck = Wishlist::where('user_id',Auth::id())->where('prod_id',$productId)->first();
                         $wishlistCheck->delete();
 
                     }

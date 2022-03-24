@@ -10,7 +10,7 @@
       <div class="container">
               <h2>Featured Products</h2>
             <div class="owl-carousel featured-carousel owl-theme">
-                @foreach ($featured_products as $prod)
+                @foreach ($featuredProducts as $prod)
                     <div class="item">
                         <div class="card">
                             <a href="{{ url('category/'.$prod->category->slug.'/'.$prod->slug) }}">
@@ -33,7 +33,7 @@
     <div class="container">
             <h2>Trending Category</h2>
           <div class="owl-carousel featured-carousel owl-theme">
-              @foreach ($trending_category as $tcategory)
+              @foreach ($trendingCategory as $tcategory)
                   <div class="item">
                       <a href="{{ url('view-category/'.$tcategory->slug) }}">
                         <div class="card">

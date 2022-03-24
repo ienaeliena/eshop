@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class FrontendController extends Controller
 {
     public function index()
-    {// dd('');
-        $featured_products = Product::where('status','0')->where('trending','1')->take('15')->get();
-        $trending_category = Category::where('popular','1')->take('15')->get();
-        return view('frontend.index',compact('featured_products','trending_category'));
+    {
+        $featuredProducts = Product::where('status','1')->where('trending','1')->take('15')->get();
+        $trendingCategory = Category::where('popular','1')->take('15')->get();
+        return view('frontend.index',compact('featuredProducts','trendingCategory'));
 
     }
 
@@ -95,9 +95,9 @@ class FrontendController extends Controller
 
     public function searchProduct(Request $request)
     {
-        $searched_product = $request->product_name;
-        if($searched_product != ""){
-            $product = Product::where('name','LIKE',"%$searched_product%")->where('status','0')->first();
+        $searchedProduct = $request->product_name;
+        if($searchedProduct != ""){
+            $product = Product::where('name','LIKE',"%$searchedProduct%")->where('status','0')->first();
             if($product){
                 return redirect('category/'.$product->category->slug.'/'.$product->slug);
 
