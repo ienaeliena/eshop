@@ -23,12 +23,12 @@
     @include('layouts.inc.sidebar')
 
     <div class="main-panel">
-        @include('layouts.inc.admin_nav')
+        @include('layouts.inc.admin-nav')
         @yield('content')
         <div class="content">
 
         </div>
-        @include('layouts.inc.admin_footer')
+        @include('layouts.inc.admin-footer')
 
     </div>
 </div>

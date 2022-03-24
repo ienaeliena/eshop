@@ -21,8 +21,8 @@
             <p>Categories</p>
           </a>
         </li>
-        <li class="nav-item {{ Request::is('add_categories') ? 'active':''; }} ">
-            <a class="nav-link" href="{{ url('add_categories') }}">
+        <li class="nav-item {{ Request::is('add-categories') ? 'active':''; }} ">
+            <a class="nav-link" href="{{ url('add-categories') }}">
               <i class="material-icons">person</i>
               <p>Add Categories</p>
             </a>
@@ -33,8 +33,8 @@
               <p>Products</p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('add_products') ? 'active':''; }} ">
-              <a class="nav-link" href="{{ url('add_products') }}">
+          <li class="nav-item {{ Request::is('add-products') ? 'active':''; }} ">
+              <a class="nav-link" href="{{ url('add-products') }}">
                 <i class="material-icons">person</i>
                 <p>Add Products</p>
               </a>

@@ -56,7 +56,7 @@
     @yield('content')
     </div>
     <div class="footer">
-        @include('layouts.inc.front_footer')
+        @include('layouts.inc.front-footer')
     </div>
 
     <div class="whatsapp-chat">
