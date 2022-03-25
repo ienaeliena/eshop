@@ -100,10 +100,14 @@ class CheckoutController extends Controller
         }
         if(Auth::user()->address1 == NULL)
         {
+            $emailCheck = User::where('email',$request->email)->where('id','!=',Auth::id())->first();
             $user = User::where('id',Auth::id())->first();
+            if(!$emailCheck){
+                $user->email = $request->email;
+
+            }
             $user->fname = $request->fname;
             $user->lname = $request->lname;
-            $user->email = $request->email;
             $user->phone = $request->phone;
             $user->address1 = $request->address1;
             $user->address2 = $request->address2;
