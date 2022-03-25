@@ -104,7 +104,7 @@ class CategoryController extends Controller
 
         return redirect('categories')->with('status','Category Successfully Updated');
     }
-    public function destroy($id){
+    public function delete($id){
 
         $category = Category::find($id);
         if($category->image)
