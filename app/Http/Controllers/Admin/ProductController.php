@@ -135,7 +135,7 @@ class ProductController extends Controller
 
     }
 
-    public function destroy($id){
+    public function delete($id){
 
         $products = Product::find($id);
         if($products->image)
